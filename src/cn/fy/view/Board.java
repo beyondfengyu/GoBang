@@ -200,13 +200,11 @@ public class Board extends JPanel {
                         public void run() {
                             try {
                                 rserver.setEnabled(false);
-                                if (rserver.isSelected())//判断是否选中为服务器
-                                {
+                                if (rserver.isSelected()) {//作为服务器
                                     server = new ServerSocket(PORT);
                                     sock = server.accept();
                                     type = 1;//默认棋子的类型
-                                } else//作为客户端
-                                {
+                                } else {//作为客户端
                                     while (HOST.equals(""))
                                         HOST = JOptionPane.showInputDialog(chessBoard, "请输入IP地址", "", JOptionPane.PLAIN_MESSAGE);
                                     sock = new Socket(HOST, PORT);
@@ -226,8 +224,7 @@ public class Board extends JPanel {
                                     switch (Integer.parseInt(strs[0])) {
                                         case 1://获知开始信息
                                             ltip.setText("游戏开始");
-                                            if ((num + type) % 2 == 0)//用于决定轮流第一个下棋
-                                            {
+                                            if ((num + type) % 2 == 0) {//用于决定轮流第一个下棋
                                                 if (CANSTART) {
                                                     CANSTART = false;
                                                     OPERABLE = true;
@@ -272,11 +269,15 @@ public class Board extends JPanel {
                             }
                         }
                     }.start();
-                } else write.println(MSG_START);
+                } else {
+                    write.println(MSG_START);
+                }
                 if (CANSTART) {
                     OPERABLE = true;
                     CANSTART = false;
-                } else CANSTART = true;
+                } else {
+                    CANSTART = true;
+                }
                 chessBoard.repaint();
             }
 
@@ -285,7 +286,6 @@ public class Board extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
                 write.println(MSG_FAIL);
                 initEnd();//游戏结束初始化数据
             }
@@ -294,14 +294,12 @@ public class Board extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
                 write.println(MSG_HE + "," + 3);
             }
         });
         bsound.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
                 if (HASSOUND) {
                     HASSOUND = false;
                     bsound.setIcon(new ImageIcon("image/nsound.gif"));
@@ -365,8 +363,6 @@ public class Board extends JPanel {
         this.add(bequal);
         this.add(bsound);
         this.add(chessBoard);
-
-
     }
 
     //初始化数据
